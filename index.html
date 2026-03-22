@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRAGYANOM</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; padding-bottom: 60px; }
+        .header { background: #004a99; color: white; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; }
+        .section { padding: 20px; display: none; }
+        .active { display: block; }
+        .card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .btn { background: #004a99; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; margin-top: 10px; }
+        .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; }
+        .nav-item { font-size: 12px; color: #555; cursor: pointer; text-align: center; }
+        .premium-tag { background: gold; color: black; font-size: 10px; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">PRAGYANOM</div>
+
+<div id="home" class="section active">
+    <h3>Welcome, Students!</h3>
+    <div class="card">
+        <h4>Class 9 Resources</h4>
+        <p>Access notes, PDFs, and question papers.</p>
+        <button class="btn" onclick="showSection('study')">Go to Study</button>
+    </div>
+    <div class="card">
+        <h4>Class 10 Resources</h4>
+        <p>Prepare for your SEBA exams here.</p>
+        <button class="btn" onclick="showSection('study')">Go to Study</button>
+    </div>
+</div>
+
+<div id="study" class="section">
+    <h3>Study Materials</h3>
+    <div class="card">
+        <h4>Science Notes (Class 10)</h4>
+        <button class="btn">View PDF</button>
+    </div>
+    <div class="card">
+        <h4>Maths Premium Paper <span class="premium-tag">PREMIUM</span></h4>
+        <button class="btn" style="background: #555;">Locked</button>
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="nav-item" onclick="showSection('home')">🏠<br>Home</div>
+    <div class="nav-item" onclick="showSection('study')">📚<br>Study</div>
+    <div class="nav-item">📺<br>Videos</div>
+    <div class="nav-item">🏆<br>Exams</div>
+</div>
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+</script>
+
+</body>
+</html>
