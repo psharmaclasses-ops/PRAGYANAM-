@@ -3,62 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRAGYANOM</title>
+    <title>PRAGYANOM | Class 9 & 10</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; padding-bottom: 60px; }
-        .header { background: #004a99; color: white; padding: 20px; text-align: center; font-size: 24px; font-weight: bold; }
-        .section { padding: 20px; display: none; }
-        .active { display: block; }
-        .card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .btn { background: #004a99; color: white; padding: 10px; border: none; border-radius: 5px; width: 100%; margin-top: 10px; }
-        .navbar { position: fixed; bottom: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; }
-        .nav-item { font-size: 12px; color: #555; cursor: pointer; text-align: center; }
-        .premium-tag { background: gold; color: black; font-size: 10px; padding: 2px 5px; border-radius: 3px; font-weight: bold; }
+        :root { --primary: #002d5b; --secondary: #00d4ff; --accent: #ffcc00; --bg: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); padding-bottom: 90px; }
+        
+        .header { 
+            background: linear-gradient(135deg, var(--primary), #005bb5); 
+            color: white; padding: 50px 20px 70px; text-align: center; 
+            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .logo { 
+            width: 100px; height: 100px; background: white; border-radius: 50%; 
+            padding: 4px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); margin-bottom: 15px;
+        }
+        .app-name { font-size: 30px; font-weight: 800; letter-spacing: 2px; margin: 0; }
+
+        .container { padding: 20px; margin-top: -50px; }
+        .card { 
+            background: white; border-radius: 20px; padding: 24px; margin-bottom: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-left: 5px solid var(--secondary);
+        }
+        .premium-card { border-left-color: var(--accent); }
+        
+        .badge { float: right; font-size: 11px; font-weight: bold; padding: 5px 12px; border-radius: 20px; background: #e3f2fd; color: #1976d2; }
+        .premium-badge { background: #fff8e1; color: #ffa000; border: 1px solid #ffd54f; }
+
+        .btn { 
+            background: linear-gradient(to right, var(--primary), #0056b3); 
+            color: white; border: none; padding: 15px; width: 100%; border-radius: 15px; 
+            font-weight: 700; font-size: 16px; margin-top: 15px;
+        }
+
+        .navbar { 
+            position: fixed; bottom: 20px; left: 20px; right: 20px; 
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px);
+            display: flex; justify-content: space-around; padding: 15px 5px; 
+            border-radius: 30px; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .nav-item { text-align: center; color: #777; text-decoration: none; flex: 1; font-size: 24px; }
+        .active { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<div class="header">PRAGYANOM</div>
-
-<div id="home" class="section active">
-    <h3>Welcome, Students!</h3>
-    <div class="card">
-        <h4>Class 9 Resources</h4>
-        <p>Access notes, PDFs, and question papers.</p>
-        <button class="btn" onclick="showSection('study')">Go to Study</button>
-    </div>
-    <div class="card">
-        <h4>Class 10 Resources</h4>
-        <p>Prepare for your SEBA exams here.</p>
-        <button class="btn" onclick="showSection('study')">Go to Study</button>
-    </div>
+<div class="header">
+    <img src="logopng.webp" alt="PRAGYANOM" class="logo">
+    <h1 class="app-name">PRAGYANOM</h1>
+    <p style="opacity:0.9">Leading the way for Class 9 & 10</p>
 </div>
 
-<div id="study" class="section">
-    <h3>Study Materials</h3>
+<div class="container">
     <div class="card">
-        <h4>Science Notes (Class 10)</h4>
-        <button class="btn">View PDF</button>
+        <span class="badge">FREE</span>
+        <h4>Class 9 Resources</h4>
+        <p>SEBA syllabus notes and question banks.</p>
+        <button class="btn">🚀 Start Learning</button>
     </div>
-    <div class="card">
-        <h4>Maths Premium Paper <span class="premium-tag">PREMIUM</span></h4>
-        <button class="btn" style="background: #555;">Locked</button>
+
+    <div class="card premium-card">
+        <span class="badge premium-badge">👑 PREMIUM</span>
+        <h4>Class 10 Board Master</h4>
+        <p>10-year solved papers and video lectures.</p>
+        <button class="btn" style="background: linear-gradient(to right, #fbc02d, #f9a825); color:#333;">✨ Unlock Access</button>
     </div>
 </div>
 
 <div class="navbar">
-    <div class="nav-item" onclick="showSection('home')">🏠<br>Home</div>
-    <div class="nav-item" onclick="showSection('study')">📚<br>Study</div>
-    <div class="nav-item">📺<br>Videos</div>
-    <div class="nav-item">🏆<br>Exams</div>
+    <div class="nav-item active">🏠</div>
+    <div class="nav-item">📘</div>
+    <div class="nav-item">📺</div>
+    <div class="nav-item">📝</div>
 </div>
-
-<script>
-    function showSection(id) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-    }
-</script>
 
 </body>
 </html>
