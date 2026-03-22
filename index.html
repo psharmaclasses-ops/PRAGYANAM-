@@ -1,89 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRAGYANOM | SEBA Hub</title>
+    <title>PRAGYANOM | Leading the Way</title>
+    
     <link rel="icon" type="image/webp" href="logopng.webp">
     <link rel="apple-touch-icon" href="logopng.webp">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <style>
-        :root { --primary: #002d5b; --secondary: #00d4ff; --accent: #ffcc00; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); padding-bottom: 90px; }
-        .header { background: linear-gradient(135deg, var(--primary), #005bb5); color: white; padding: 30px 20px 50px; text-align: center; border-bottom-left-radius: 40px; border-bottom-right-radius: 40px; }
-        .logo { width: 70px; height: 70px; background: white; border-radius: 50%; padding: 4px; margin-bottom: 10px; }
-        .notice-bar { background: #fff8e1; color: #b7791f; padding: 8px; font-size: 13px; font-weight: bold; overflow: hidden; white-space: nowrap; border-bottom: 1px solid #ffe082; }
-        .notice-text { display: inline-block; animation: scroll 15s linear infinite; }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap');
+        
+        :root { 
+            --primary: #0f172a; --secondary: #3b82f6; --accent: #f59e0b; 
+            --success: #10b981; --bg: #f1f5f9; --glass: rgba(255, 255, 255, 0.9);
+        }
+
+        body { font-family: 'Poppins', sans-serif; margin: 0; background: var(--bg); color: var(--primary); padding-bottom: 100px; -webkit-tap-highlight-color: transparent; }
+        
+        /* Premium Header */
+        .header { 
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%); 
+            color: white; padding: 40px 20px 60px; text-align: center; 
+            border-bottom-left-radius: 50px; border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        .logo { width: 90px; height: 90px; border-radius: 50%; border: 4px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.2); margin-bottom: 15px; }
+        .app-name { font-size: 32px; font-weight: 800; letter-spacing: 2px; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .quote { font-style: italic; font-size: 13px; opacity: 0.9; margin-top: 8px; }
+
+        /* Notice Scrolling */
+        .notice-container { background: #fffbeb; border-bottom: 1px solid #fde68a; padding: 10px; overflow: hidden; white-space: nowrap; }
+        .notice-text { display: inline-block; color: #92400e; font-weight: 600; font-size: 13px; animation: scroll 20s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .page { display: none; padding: 20px; margin-top: -30px; }
-        .active-page { display: block; animation: fadeIn 0.3s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .class-box { background: white; border-radius: 20px; padding: 15px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        .subject-card { background: white; padding: 15px; border-radius: 15px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); text-decoration: none; color: inherit; margin-bottom:10px; }
-        .video-card { background: #000; color: white; border-radius: 15px; padding: 10px; margin-bottom: 15px; }
-        .video-thumb { background: #333; height: 150px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 40px; }
-        .back-btn { color: white; background: rgba(255,255,255,0.2); border: none; padding: 8px 15px; border-radius: 20px; margin-bottom: 15px; }
-        .navbar { position: fixed; bottom: 15px; left: 15px; right: 15px; background: white; display: flex; justify-content: space-around; padding: 15px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .nav-icon { font-size: 24px; cursor: pointer; }
+
+        /* Navigation Logic */
+        .page { display: none; padding: 20px; animation: slideUp 0.4s ease-out; }
+        .active-page { display: block; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Card Styling */
+        .section-title { font-size: 20px; font-weight: 700; margin: 20px 0 15px; display: flex; align-items: center; gap: 10px; }
+        .class-card { background: var(--glass); border-radius: 25px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid white; }
+        
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .action-btn { 
+            padding: 15px; border-radius: 18px; text-align: center; font-weight: 600; font-size: 14px;
+            border: none; cursor: pointer; transition: 0.3s; color: white;
+        }
+        .btn-free { background: linear-gradient(to bottom right, #3b82f6, #2563eb); }
+        .btn-premium { background: linear-gradient(to bottom right, #f59e0b, #d97706); }
+        
+        /* Subject List */
+        .subject-grid { display: flex; flex-direction: column; gap: 12px; }
+        .subject-item { 
+            background: white; padding: 18px; border-radius: 20px; display: flex; align-items: center; 
+            gap: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); text-decoration: none; color: #1e293b; font-weight: 600;
+        }
+        .sub-icon { font-size: 24px; background: #f1f5f9; padding: 10px; border-radius: 15px; width: 30px; text-align: center; }
+
+        /* Navbar */
+        .navbar { 
+            position: fixed; bottom: 20px; left: 20px; right: 20px; 
+            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px);
+            display: flex; justify-content: space-around; padding: 18px; 
+            border-radius: 30px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .nav-item { font-size: 22px; color: #94a3b8; cursor: pointer; transition: 0.3s; }
+        .nav-item.active { color: #3b82f6; transform: translateY(-5px); }
+
+        .back-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 18px; border-radius: 15px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-<div class="notice-bar">
-    <div class="notice-text">🔔 PRAGYANOM: New Science Notes and Videos Added! | Online Mock Exam starts on Monday!</div>
+<div class="notice-container">
+    <div class="notice-text">🚀 WELCOME TO PRAGYANOM: New Notes for Assamese and Maths uploaded! | Premium mock tests starting this Sunday!</div>
 </div>
 
 <div class="header">
-    <button class="back-btn" id="backBtn" style="display:none;" onclick="showPage('home')">← Back</button><br>
-    <img src="logopng.webp" alt="Logo" class="logo">
-    <h1 style="margin:0; font-size:24px;">PRAGYANOM</h1>
+    <button id="backBtn" class="back-btn" style="display:none;" onclick="showPage('home')">← Back</button><br>
+    <img src="logopng.webp" alt="PRAGYANOM" class="logo">
+    <h1 class="app-name">PRAGYANAM</h1>
+    <p class="quote">"Education is the most powerful weapon which you can use to change the world."</p>
 </div>
 
 <div class="container">
     <div id="home" class="page active-page">
-        <div class="class-box"><h3>CLASS 9</h3>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div onclick="showPage('c9-free')" style="background:#e3f2fd; padding:15px; border-radius:15px; text-align:center; color:#1976d2; font-weight:bold;">📖 Notes</div>
-                <div style="background:#fff8e1; padding:15px; border-radius:15px; text-align:center; color:#ffa000; font-weight:bold;">👑 Premium</div>
+        <div class="section-title">🎓 Academic Hub</div>
+        <div class="class-card">
+            <h3 style="margin-top:0">Class 9 SEBA</h3>
+            <div class="btn-grid">
+                <button class="action-btn btn-free" onclick="showPage('c9-free')">📖 Free Notes</button>
+                <button class="action-btn btn-premium" onclick="showPage('c9-pre')">👑 Premium</button>
             </div>
         </div>
-        <div class="class-box"><h3>CLASS 10</h3>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div onclick="showPage('c10-free')" style="background:#e3f2fd; padding:15px; border-radius:15px; text-align:center; color:#1976d2; font-weight:bold;">📝 Notes</div>
-                <div style="background:#fff8e1; padding:15px; border-radius:15px; text-align:center; color:#ffa000; font-weight:bold;">✨ Premium</div>
+        <div class="class-card">
+            <h3 style="margin-top:0">Class 10 SEBA</h3>
+            <div class="btn-grid">
+                <button class="action-btn btn-free" onclick="showPage('c10-free')">📝 Free Notes</button>
+                <button class="action-btn btn-premium" onclick="showPage('c10-pre')">✨ Premium</button>
             </div>
+        </div>
+    </div>
+
+    <div id="c10-free" class="page">
+        <h3 style="color:var(--secondary)">Class 10 - Free Notes</h3>
+        <div class="subject-grid">
+            <a href="#" class="subject-item"><span class="sub-icon">📖</span> Assamese</a>
+            <a href="#" class="subject-item"><span class="sub-icon">📘</span> English</a>
+            <a href="#" class="subject-item"><span class="sub-icon">🧪</span> General Science</a>
+            <a href="#" class="subject-item"><span class="sub-icon">📐</span> General Maths</a>
+            <a href="#" class="subject-item"><span class="sub-icon">🌍</span> Social Science</a>
+        </div>
+    </div>
+
+    <div id="c10-pre" class="page">
+        <h3 style="color:var(--accent)">Class 10 - Premium Access</h3>
+        <div class="subject-grid">
+            <a href="#" class="subject-item"><span class="sub-icon">⭐</span> Special Assamese Notes</a>
+            <a href="#" class="subject-item"><span class="sub-icon">⭐</span> Special English Notes</a>
+            <a href="#" class="subject-item"><span class="sub-icon">🧪</span> Science (Solved Papers)</a>
+            <a href="#" class="subject-item"><span class="sub-icon">📐</span> Maths (Video Solutions)</a>
+            <a href="#" class="subject-item"><span class="sub-icon">📜</span> 10 Year Question Bank</a>
         </div>
     </div>
 
     <div id="video-page" class="page">
-        <h3>Class 9 & 10 Video Lessons</h3>
-        <div class="video-card">
-            <div class="video-thumb">▶️</div>
-            <p><b>Science: Class 10 - Chemical Reactions</b></p>
-            <button style="background:red; color:white; border:none; padding:10px; border-radius:10px; width:100%;">Watch on YouTube</button>
-        </div>
-        <div class="video-card">
-            <div class="video-thumb">▶️</div>
-            <p><b>Maths: Class 9 - Number Systems</b></p>
-            <button style="background:red; color:white; border:none; padding:10px; border-radius:10px; width:100%;">Watch on YouTube</button>
-        </div>
+        <div class="section-title">📺 Video Lectures</div>
+        <div class="class-card" onclick="showPage('c10-free')"><h3>Class 10 Video Library</h3><p>Tap to view free lectures</p></div>
+        <div class="class-card" onclick="showPage('c9-free')"><h3>Class 9 Video Library</h3><p>Tap to view free lectures</p></div>
     </div>
 
-    <div id="c10-free" class="page"><h3>Class 10 Notes</h3><div class="subject-card">📘 English</div><div class="subject-card">🧪 Science</div></div>
-    <div id="c9-free" class="page"><h3>Class 9 Notes</h3><div class="subject-card">📘 English</div><div class="subject-card">🧪 Science</div></div>
-    <div id="exam-page" class="page"><h3>Online Examinations</h3><div class="class-box"><h4>Weekly Science Quiz</h4><button style="width:100%; padding:10px; border-radius:10px; border:none; background:var(--secondary); color:white;">Start Exam</button></div></div>
+    <div id="exam-page" class="page">
+        <div class="section-title">📝 Online Exams</div>
+        <div class="class-card">
+            <h4>Mock Test: Science (Ch-1)</h4>
+            <p>Score 10/10 to win a certificate!</p>
+            <button class="action-btn btn-free" style="width:100%">Start Quiz</button>
+        </div>
+    </div>
 </div>
 
 <div class="navbar">
-    <div class="nav-icon" onclick="showPage('home')">🏠</div>
-    <div class="nav-icon" onclick="showPage('c10-free')">📘</div>
-    <div class="nav-icon" onclick="showPage('video-page')">📺</div>
-    <div class="nav-icon" onclick="showPage('exam-page')">📝</div>
+    <div class="nav-item active" onclick="showPage('home', this)">🏠</div>
+    <div class="nav-item" onclick="showPage('c10-free', this)">📘</div>
+    <div class="nav-item" onclick="showPage('video-page', this)">📺</div>
+    <div class="nav-item" onclick="showPage('exam-page', this)">📝</div>
 </div>
 
 <script>
-    function showPage(id) {
+    function showPage(id, navEl) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
         document.getElementById(id).classList.add('active-page');
+        
         document.getElementById('backBtn').style.display = (id === 'home') ? 'none' : 'inline-block';
+        
+        if(navEl) {
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            navEl.classList.add('active');
+        }
         window.scrollTo(0,0);
     }
 </script>
