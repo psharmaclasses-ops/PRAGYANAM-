@@ -6,29 +6,43 @@
     <title>PRAGYANOM | Class 9 & 10</title>
     <style>
         :root { --primary: #002d5b; --secondary: #00d4ff; --accent: #ffcc00; --bg: #f8f9fa; }
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); padding-bottom: 90px; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: var(--bg); padding-bottom: 90px; overflow-x: hidden; }
+        
+        /* Header */
         .header { 
             background: linear-gradient(135deg, var(--primary), #005bb5); 
             color: white; padding: 40px 20px 60px; text-align: center; 
             border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
         }
         .logo { width: 80px; height: 80px; background: white; border-radius: 50%; padding: 4px; margin-bottom: 10px; }
-        .container { padding: 20px; margin-top: -40px; }
         
-        /* Category Styling */
+        /* Sections Visibility */
+        .page { display: none; padding: 20px; margin-top: -40px; }
+        .active-page { display: block; animation: fadeIn 0.3s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Grid & Cards */
         .class-box { background: white; border-radius: 20px; padding: 15px; margin-bottom: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
         .class-title { font-size: 22px; font-weight: 800; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; text-align: center; }
         
         .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .option-card { 
             padding: 15px; border-radius: 15px; text-align: center; font-weight: 700; font-size: 14px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.2s; border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.2s; border: 1px solid #eee; cursor: pointer;
         }
         .option-card:active { transform: scale(0.95); }
         .free { background: #e3f2fd; color: #1976d2; border-top: 4px solid var(--secondary); }
         .premium { background: #fff8e1; color: #ffa000; border-top: 4px solid var(--accent); }
         
-        .icon { font-size: 24px; display: block; margin-bottom: 5px; }
+        /* Subject List */
+        .subject-card {
+            background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .subject-icon { font-size: 24px; background: #f0f4f8; padding: 10px; border-radius: 12px; }
+        
+        .back-btn { color: white; background: rgba(255,255,255,0.2); border: none; padding: 5px 15px; border-radius: 20px; margin-bottom: 10px; cursor: pointer; }
+
         .navbar { 
             position: fixed; bottom: 20px; left: 20px; right: 20px; 
             background: rgba(255, 255, 255, 0.95); display: flex; justify-content: space-around; 
@@ -39,43 +53,78 @@
 <body>
 
 <div class="header">
+    <button class="back-btn" id="backBtn" style="display:none;" onclick="showPage('home')">← Back</button>
+    <br>
     <img src="logopng.webp" alt="PRAGYANOM" class="logo">
     <h1 style="margin:0; letter-spacing:1px;">PRAGYANOM</h1>
-    <p style="opacity:0.9; font-size:14px;">Study Material & Online Exam</p>
 </div>
 
-<div class="container">
+<div id="home" class="page active-page">
     <div class="class-box">
         <div class="class-title">CLASS 9</div>
         <div class="option-grid">
-            <div class="option-card free">
-                <span class="icon">📖</span> FREE<br>Notes
-            </div>
-            <div class="option-card premium">
-                <span class="icon">👑</span> PREMIUM<br>Access
-            </div>
+            <div class="option-card free" onclick="showPage('c9-free')">📖 FREE Notes</div>
+            <div class="option-card premium">👑 PREMIUM</div>
         </div>
     </div>
-
     <div class="class-box">
         <div class="class-title">CLASS 10</div>
         <div class="option-grid">
-            <div class="option-card free">
-                <span class="icon">📝</span> FREE<br>Notes
-            </div>
-            <div class="option-card premium">
-                <span class="icon">✨</span> PREMIUM<br>Access
-            </div>
+            <div class="option-card free" onclick="showPage('c10-free')">📝 FREE Notes</div>
+            <div class="option-card premium">✨ PREMIUM</div>
         </div>
+    </div>
+</div>
+
+<div id="c10-free" class="page">
+    <h3 style="color:var(--primary)">Class 10 - Free Subjects</h3>
+    <div class="subject-card">
+        <div class="subject-icon">🧪</div>
+        <div><b>Science</b><br><small>Chapter-wise Notes</small></div>
+    </div>
+    <div class="subject-card">
+        <div class="subject-icon">📐</div>
+        <div><b>Mathematics</b><br><small>Important Formulas</small></div>
+    </div>
+    <div class="subject-card">
+        <div class="subject-icon">🌍</div>
+        <div><b>Social Science</b><br><small>Question Bank</small></div>
+    </div>
+</div>
+
+<div id="c9-free" class="page">
+    <h3 style="color:var(--primary)">Class 9 - Free Subjects</h3>
+    <div class="subject-card">
+        <div class="subject-icon">🧪</div>
+        <div><b>General Science</b></div>
     </div>
 </div>
 
 <div class="navbar">
-    <div style="color:var(--primary); font-size:24px;">🏠</div>
-    <div style="font-size:24px;">📘</div>
-    <div style="font-size:24px;">📺</div>
-    <div style="font-size:24px;">📝</div>
+    <div onclick="showPage('home')" style="color:var(--primary); font-size:24px;">🏠</div>
+    <div>📘</div>
+    <div>📺</div>
+    <div>📝</div>
 </div>
+
+<script>
+    function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active-page');
+        });
+        // Show selected page
+        document.getElementById(pageId).classList.add('active-page');
+        
+        // Show/Hide back button
+        if(pageId === 'home') {
+            document.getElementById('backBtn').style.display = 'none';
+        } else {
+            document.getElementById('backBtn').style.display = 'inline-block';
+        }
+        window.scrollTo(0,0);
+    }
+</script>
 
 </body>
 </html>
